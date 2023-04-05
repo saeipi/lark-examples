@@ -7,6 +7,7 @@ import (
 	"lark/pkg/utils"
 	"lark/pkg/xhttp"
 	"log"
+	"time"
 )
 
 // Hub maintains the set of active clients and broadcasts messages to the
@@ -27,7 +28,7 @@ type Hub struct {
 
 func newHub() *Hub {
 	return &Hub{
-		broadcast:  make(chan []byte),
+		broadcast:  make(chan []byte, 100000),
 		register:   make(chan *Client),
 		unregister: make(chan *Client),
 		clients:    make(map[*Client]bool),
@@ -46,6 +47,7 @@ func (h *Hub) run() {
 			}
 		case message := <-h.broadcast:
 			fmt.Println(utils.ToString(message))
+			time.Sleep(1 * time.Second)
 			for client := range h.clients {
 				select {
 				case client.send <- message:

@@ -9,6 +9,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"net/url"
 	"os"
@@ -31,7 +32,7 @@ func main() {
 	log.Printf("connecting to %s", u.String())
 
 	headers := map[string][]string{}
-	token := "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODEwMzA2ODEsImlhdCI6MTY4MDQyNTg4MSwiaXNzIjoibGFyay5jb20iLCJwbGF0Zm9ybSI6MSwic2Vzc2lvbl9pZCI6IjdmMWQyNjlmNzc1MWI2MzNlNzExOWM5N2U5Zjk1MGE1IiwidWlkIjoiMTY0MjQ1MTMwMzc5Nzg4Njk3NiJ9.HFi2-jyw8j_P4ALnvsMJGHcfBf2JjOrEIVs-vwcuhPs"
+	token := "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODEyOTY3NTMsImlhdCI6MTY4MDY5MTk1MywiaXNzIjoibGFyay5jb20iLCJwbGF0Zm9ybSI6MSwic2Vzc2lvbl9pZCI6IjUxM2JjMjFiZTNiZjE2MGM5YzE1YWRkY2U2YWQ0ZWNjIiwidWlkIjoiMTY0MzU2NzI4OTg2MzI0NTgyNCJ9.cwMB4KRHHDDCEz0UlKSyTlHVp1g0Jrjkbqc2g1XPkuk"
 	headers["Cookie"] = []string{token}
 	c, _, err := websocket.DefaultDialer.Dial(u.String(), headers)
 	if err != nil {
@@ -61,7 +62,9 @@ func main() {
 		case <-done:
 			return
 		case t := <-ticker.C:
-			err := c.WriteMessage(websocket.TextMessage, []byte(t.String()))
+			fmt.Println(t)
+			msg := "请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我我请我bbb"
+			err := c.WriteMessage(websocket.TextMessage, []byte(msg))
 			if err != nil {
 				log.Println("write:", err)
 				return

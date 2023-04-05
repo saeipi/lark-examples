@@ -34,7 +34,8 @@ func (s *authService) SignUp(ctx context.Context, req *pb_auth.SignUpReq) (resp 
 	u.Email = req.Email
 	u.Mobile = req.Mobile
 	u.RegPlatform = int(req.RegPlatform)
-	u.ServerId = 1
+	//0:1~9
+	u.ServerId = 10000
 	u.CityId = int(req.CityId)
 	u.AvatarKey = constant.CONST_AVATAR_KEY_SMALL
 	avatar = &po.Avatar{
